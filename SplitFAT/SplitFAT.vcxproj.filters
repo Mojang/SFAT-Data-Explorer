@@ -1,0 +1,257 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="src\SplitFAT\DataBlockManager.cpp">
+      <Filter>Low Level\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SplitFAT\FAT.cpp">
+      <Filter>Low Level\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SplitFAT\VolumeDescriptor.cpp">
+      <Filter>Low Level\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SplitFAT\VolumeManager.cpp">
+      <Filter>Low Level\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SplitFAT\utils\CRC.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SplitFAT\utils\Logger.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SplitFAT\utils\Mutex.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SplitFAT\VirtualFileSystem.cpp">
+      <Filter>Middle Level\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SplitFAT\utils\SFATAssert.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SplitFAT\SplitFATFileSystem.cpp">
+      <Filter>High Level\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SplitFAT\utils\PathString.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SplitFAT\FileDescriptorRecord.cpp">
+      <Filter>Middle Level\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SplitFAT\FileManipulator.cpp">
+      <Filter>Middle Level\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SplitFAT\AbstractFileSystem.cpp">
+      <Filter>Low Level\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SplitFAT\utils\BitSet.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SplitFAT\DataPlacementStrategyBase.cpp">
+      <Filter>Low Level\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="test\src\WindowsDataPlacementStrategy.cpp">
+      <Filter>High Level\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SplitFAT\RecoveryManager.cpp">
+      <Filter>Middle Level\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SplitFAT\BlockVirtualization.cpp">
+      <Filter>Low Level\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="test\src\BerwickCombinedFileSystem.cpp">
+      <Filter>High Level\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="test\src\BerwickDataPlacementStrategy.cpp">
+      <Filter>High Level\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="test\src\BerwickFileSystem.cpp">
+      <Filter>High Level\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="test\src\BerwickFileSystemLargeWrites.cpp">
+      <Filter>High Level\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="test\src\BerwickSplitFATConfiguration.cpp">
+      <Filter>High Level\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="test\src\BerwickToWindowsPort.cpp">
+      <Filter>High Level\Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="test\src\WindowsFileSystem.cpp">
+      <Filter>High Level\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="test\src\WindowsSplitFATConfiguration.cpp">
+      <Filter>High Level\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SplitFAT\SplitFATTransactConfiguration.cpp">
+      <Filter>Low Level\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SplitFAT\Transaction.cpp">
+      <Filter>Low Level\Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\SplitFAT\utils\CRC.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SplitFAT\utils\Logger.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SplitFAT\utils\Mutex.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SplitFAT\utils\SFATAssert.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SplitFAT\Common.h">
+      <Filter>Low Level\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SplitFAT\ControlStructures.h">
+      <Filter>Low Level\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SplitFAT\DataBlockManager.h">
+      <Filter>Low Level\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SplitFAT\FAT.h">
+      <Filter>Low Level\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SplitFAT\VolumeDescriptor.h">
+      <Filter>Low Level\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SplitFAT\VolumeManager.h">
+      <Filter>Low Level\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SplitFAT\VirtualFileSystem.h">
+      <Filter>Middle Level\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SplitFAT\FileDescriptorRecord.h">
+      <Filter>Middle Level\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SplitFAT\RecoveryManager.h">
+      <Filter>Middle Level\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SplitFAT\SplitFATFileSystem.h">
+      <Filter>High Level\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SplitFAT\FileManipulator.h">
+      <Filter>Middle Level\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SplitFAT\utils\PathString.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SplitFAT\utils\HelperFunctions.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SplitFAT\AbstractFileSystem.h">
+      <Filter>Low Level\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SplitFAT\SplitFATConfigurationBase.h">
+      <Filter>Low Level\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SplitFAT\FileSystemConstants.h">
+      <Filter>Low Level\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SplitFAT\LowLevelAccess.h">
+      <Filter>Low Level\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SplitFAT\utils\BitSet.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SplitFAT\DataPlacementStrategyBase.h">
+      <Filter>Low Level\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="test\include\WindowsDataPlacementStrategy.h">
+      <Filter>High Level\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SplitFAT\utils\MemoryBufferPool.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SplitFAT\BlockVirtualization.h">
+      <Filter>Low Level\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="test\include\BerwickCombinedFileSystem.h">
+      <Filter>High Level\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="test\include\BerwickDataPlacementStrategy.h">
+      <Filter>High Level\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="test\include\BerwickFileSystem.h">
+      <Filter>High Level\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="test\include\BerwickFileSystemLargeWrites.h">
+      <Filter>High Level\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="test\include\BerwickSplitFATConfiguration.h">
+      <Filter>High Level\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="test\include\BerwickToWindowsPort.h">
+      <Filter>High Level\Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="test\include\WindowsFileSystem.h">
+      <Filter>High Level\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="test\include\WindowsSplitFATConfiguration.h">
+      <Filter>High Level\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SplitFAT\SplitFATTransactConfiguration.h">
+      <Filter>Low Level\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SplitFAT\Transaction.h">
+      <Filter>Low Level\Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Utils">
+      <UniqueIdentifier>{1a462a26-3b31-4b5b-9dd6-c5720c4737ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Documentation">
+      <UniqueIdentifier>{8fc05a15-9349-4e1d-8311-6ecfc3c5cf0d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Low Level">
+      <UniqueIdentifier>{fbd7c73d-f61a-4cd6-9ce5-9c9cf2a1a2a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Low Level\Header Files">
+      <UniqueIdentifier>{f9a7790a-55b5-440b-a34c-7848349e9cca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Low Level\Source Files">
+      <UniqueIdentifier>{06bdd378-0846-42a3-9e11-4c26656c66aa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Middle Level">
+      <UniqueIdentifier>{bf4144ae-71c6-4e2d-bf3a-55457b8e6d7f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Middle Level\Source Files">
+      <UniqueIdentifier>{1b39169d-790a-413c-9d11-4eece7a52eba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Middle Level\Header Files">
+      <UniqueIdentifier>{a2d29db2-98a9-4760-b465-7b5d6c875a33}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="High Level">
+      <UniqueIdentifier>{760326aa-89aa-4492-853d-9c69efd85030}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="High Level\Header Files">
+      <UniqueIdentifier>{34dbe281-ae34-4ff3-80c8-d1c36fd8a7f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="High Level\Source Files">
+      <UniqueIdentifier>{52590fcf-b354-44d5-b7a4-df2c798572b4}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Documents\Split FAT FS Design.pdf">
+      <Filter>Documentation</Filter>
+    </None>
+    <None Include="..\Documents\ClassDiagram\ClassDiagram.cd">
+      <Filter>Documentation</Filter>
+    </None>
+    <None Include="..\README.md">
+      <Filter>Documentation</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\Documents\DesignAndImplementation.txt">
+      <Filter>Documentation</Filter>
+    </Text>
+  </ItemGroup>
+</Project>

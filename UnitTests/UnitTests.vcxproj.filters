@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="Source\CRC32Test.cpp">
+      <Filter>Source Code</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\LowLevelTests.cpp">
+      <Filter>Source Code</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\UnitTestsMain.cpp">
+      <Filter>Source Code</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\VirtualFileSystemTests.cpp">
+      <Filter>Source Code</Filter>
+    </ClCompile>
+    <ClCompile Include="source\pch.cpp">
+      <Filter>Source Code</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Main.cpp">
+      <Filter>Source Code</Filter>
+    </ClCompile>
+    <ClCompile Include="source\SplitFATFileSystemTests.cpp">
+      <Filter>Source Code</Filter>
+    </ClCompile>
+    <ClCompile Include="source\PathStringTests.cpp">
+      <Filter>Source Code</Filter>
+    </ClCompile>
+    <ClCompile Include="source\TransactionTests.cpp">
+      <Filter>Source Code</Filter>
+    </ClCompile>
+    <ClCompile Include="source\BitSetTest.cpp">
+      <Filter>Source Code</Filter>
+    </ClCompile>
+    <ClCompile Include="source\DefragmentationTests.cpp">
+      <Filter>Source Code</Filter>
+    </ClCompile>
+    <ClCompile Include="source\MultithreadingTest.cpp">
+      <Filter>Source Code</Filter>
+    </ClCompile>
+    <ClCompile Include="source\MemoryBufferPoolTests.cpp">
+      <Filter>Source Code</Filter>
+    </ClCompile>
+    <ClCompile Include="source\BlockVirtualizationTests.cpp">
+      <Filter>Source Code</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Berwick_DefragmentationTests.cpp">
+      <Filter>Source Code</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Berwick_SplitFATFileSystemTests.cpp">
+      <Filter>Source Code</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Berwick_TransactionTests.cpp">
+      <Filter>Source Code</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Source\UnitTestsMain.h">
+      <Filter>Source Code</Filter>
+    </ClInclude>
+    <ClInclude Include="source\pch.h">
+      <Filter>Source Code</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Code">
+      <UniqueIdentifier>{51f9f9f5-58d2-4527-b384-83f11c87a29a}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

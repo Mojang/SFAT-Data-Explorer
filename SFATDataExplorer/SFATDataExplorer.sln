@@ -1,0 +1,52 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.960
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SFATDataExplorer", "SFATDataExplorer\SFATDataExplorer.vcxproj", "{5158FB53-32C8-4DD5-96CA-E9FFF71B3A09}"
+	ProjectSection(ProjectDependencies) = postProject
+		{4584CB55-9911-4A0D-8A11-4CD4E89D5289} = {4584CB55-9911-4A0D-8A11-4CD4E89D5289}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SplitFAT", "..\SplitFAT\SplitFAT.vcxproj", "{4584CB55-9911-4A0D-8A11-4CD4E89D5289}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|ORBIS = Debug|ORBIS
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|ORBIS = Release|ORBIS
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5158FB53-32C8-4DD5-96CA-E9FFF71B3A09}.Debug|ORBIS.ActiveCfg = Debug|Win32
+		{5158FB53-32C8-4DD5-96CA-E9FFF71B3A09}.Debug|x64.ActiveCfg = Debug|x64
+		{5158FB53-32C8-4DD5-96CA-E9FFF71B3A09}.Debug|x64.Build.0 = Debug|x64
+		{5158FB53-32C8-4DD5-96CA-E9FFF71B3A09}.Debug|x86.ActiveCfg = Debug|Win32
+		{5158FB53-32C8-4DD5-96CA-E9FFF71B3A09}.Debug|x86.Build.0 = Debug|Win32
+		{5158FB53-32C8-4DD5-96CA-E9FFF71B3A09}.Release|ORBIS.ActiveCfg = Release|Win32
+		{5158FB53-32C8-4DD5-96CA-E9FFF71B3A09}.Release|x64.ActiveCfg = Release|x64
+		{5158FB53-32C8-4DD5-96CA-E9FFF71B3A09}.Release|x64.Build.0 = Release|x64
+		{5158FB53-32C8-4DD5-96CA-E9FFF71B3A09}.Release|x86.ActiveCfg = Release|Win32
+		{5158FB53-32C8-4DD5-96CA-E9FFF71B3A09}.Release|x86.Build.0 = Release|Win32
+		{4584CB55-9911-4A0D-8A11-4CD4E89D5289}.Debug|ORBIS.ActiveCfg = Debug|ORBIS
+		{4584CB55-9911-4A0D-8A11-4CD4E89D5289}.Debug|ORBIS.Build.0 = Debug|ORBIS
+		{4584CB55-9911-4A0D-8A11-4CD4E89D5289}.Debug|x64.ActiveCfg = Debug|x64
+		{4584CB55-9911-4A0D-8A11-4CD4E89D5289}.Debug|x64.Build.0 = Debug|x64
+		{4584CB55-9911-4A0D-8A11-4CD4E89D5289}.Debug|x86.ActiveCfg = Debug|Win32
+		{4584CB55-9911-4A0D-8A11-4CD4E89D5289}.Debug|x86.Build.0 = Debug|Win32
+		{4584CB55-9911-4A0D-8A11-4CD4E89D5289}.Release|ORBIS.ActiveCfg = Release|ORBIS
+		{4584CB55-9911-4A0D-8A11-4CD4E89D5289}.Release|ORBIS.Build.0 = Release|ORBIS
+		{4584CB55-9911-4A0D-8A11-4CD4E89D5289}.Release|x64.ActiveCfg = Release|x64
+		{4584CB55-9911-4A0D-8A11-4CD4E89D5289}.Release|x64.Build.0 = Release|x64
+		{4584CB55-9911-4A0D-8A11-4CD4E89D5289}.Release|x86.ActiveCfg = Release|Win32
+		{4584CB55-9911-4A0D-8A11-4CD4E89D5289}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {71346495-D460-4D05-B7CE-F9C09F7B3D02}
+	EndGlobalSection
+EndGlobal
