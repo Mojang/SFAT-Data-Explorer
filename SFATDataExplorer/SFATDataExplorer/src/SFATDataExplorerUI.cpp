@@ -78,11 +78,9 @@ void SFATDataExplorerUI::showWindow()
 
 	if (mRequestFileDialog) {
 		auto newPath = mWindowsDialogs.BrowseFolder("Select PS4 Storage Directory", mDownloadStoragePath);
-		if (!newPath.empty()) {
-			if (OpenSFATStorage()) {
-				mDownloadStoragePath = newPath;
-				IterateThroughSFATDirectories();
-			}
+		if (!newPath.empty() && OpenSFATStorage(newPath)) {
+			mDownloadStoragePath = newPath;
+			IterateThroughSFATDirectories();
 		}
 		//openFileDialog();
 		mRequestFileDialog = false;
@@ -132,6 +130,40 @@ void SFATDataExplorerUI::showMenu()
 			if (ImGui::MenuItem("Cut", "CTRL+X")) {}
 			if (ImGui::MenuItem("Copy", "CTRL+C")) {}
 			if (ImGui::MenuItem("Paste", "CTRL+V")) {}
+			ImGui::EndMenu();
+		}
+		if (ImGui::BeginMenu("Integrity Tests")) {
+			if (mFileStorage) {
+				if (ImGui::MenuItem("Integrity Test")) {
+					// Tests for clusters that are allocated (and in chain),
+					// but there is no FileDescriptorRecord that correposnds to the cluster chain.
+					// So the detected error should be in the FAT
+					::SFAT::ErrorCode err = mFileStorage->executeDebugCommand("", "integrityTest");
+					if (err == ErrorCode::ERROR_FAT_INTEGRITY) {
+						printf("Integrity error detected!\n");
+					}
+					else if (err == ErrorCode::RESULT_OK) {
+						printf("No error detected!\n");
+					}
+					else {
+						printf("An error during the integrity test!\n");
+					}
+				}
+				if (ImGui::MenuItem("CRC for allocated clusters")) {
+					// For every allocated cluster checks whether the CRC calculated
+					// from the stored data matches with the one stored in the corresponding FAT cell.
+					::SFAT::ErrorCode err = mFileStorage->executeDebugCommand("", "dataConsistencyTest");
+					if (err == ErrorCode::ERROR_FAT_INTEGRITY) {
+						printf("Integrity error detected!\n");
+					}
+					else if (err == ErrorCode::RESULT_OK) {
+						printf("No error detected!\n");
+					}
+					else {
+						printf("An error during the integrity test!\n");
+					}
+				}
+			}
 			ImGui::EndMenu();
 		}
 		ImGui::EndMainMenuBar();
@@ -265,10 +297,10 @@ void SFATDataExplorerUI::ShowDirectoryTree() {
 	}
 }
 
-bool SFATDataExplorerUI::OpenSFATStorage() {
+bool SFATDataExplorerUI::OpenSFATStorage(const std::string& downloadStoragePath) {
 	mFileStorage = std::make_shared<SplitFATFileStorage>();
 	std::shared_ptr<BerwickSplitFATConfiguration> lowLevelFileAccess = std::make_shared<BerwickSplitFATConfiguration>();
-	ErrorCode err = lowLevelFileAccess->setup(mDownloadStoragePath);
+	ErrorCode err = lowLevelFileAccess->setup(downloadStoragePath);
 	SFAT_ASSERT(err == ErrorCode::RESULT_OK, "The SFAT low level setup failed!");
 	err = mFileStorage->setup(lowLevelFileAccess);
 	if (err != ErrorCode::RESULT_OK) {
@@ -329,7 +361,7 @@ bool SFATDataExplorerUI::IterateThroughSFATDirectyItems() {
 
 			mFileStorage = std::make_shared<SplitFATFileStorage>();
 			std::shared_ptr<BerwickSplitFATConfiguration> lowLevelFileAccess = std::make_shared<BerwickSplitFATConfiguration>();
-			ErrorCode err = lowLevelFileAccess->setup(TEST_STORAGE_PATH);
+			ErrorCode err = lowLevelFileAccess->setup(mDownloadStoragePath);
 			SFAT_ASSERT(err == ErrorCode::RESULT_OK, "The SFAT low level setup failed!");
 			err = mFileStorage->setup(lowLevelFileAccess);
 			if (err != ErrorCode::RESULT_OK) {

@@ -7,6 +7,7 @@
 #define _SPLIT_FAT_CELL_VALUE_H_
 
 #define SPLIT_FAT__ENABLE_CRC_PER_CLUSTER	1
+#define	SPLIT_FAT__USE_SEPARATE_CRC_FIELD	0
 
 namespace SFAT {
 
@@ -229,29 +230,47 @@ namespace SFAT {
 		ROOT_START_CLUSTER_INDEX = 0, // This cluster index is reserved for the start of the Root directory
 		FREE_CLUSTER = ROOT_START_CLUSTER_INDEX, // Note that we can use the index 0 for that, becase the cluster with index 0 is the Root, and nothing is supposed to point to the begining of the Root.
 		CLUSTER_INDEX_BITS_COUNT = 22,
+#if !(SPLIT_FAT__USE_SEPARATE_CRC_FIELD == 1)
 		CLUSTER_SHORT_INDEX_BITS_COUNT = 14, // The cluster for the FileDescriptorRecord is represented with only the first 14 bits
+#endif
 		CLUSTER_INDEX_MASK = (1UL << CLUSTER_INDEX_BITS_COUNT) - 1, //22 bits is enough for addressing 32GB with cluster size of 8192 bytes. The final value is 0x3FFFFF
+#if !(SPLIT_FAT__USE_SEPARATE_CRC_FIELD == 1)
 		CLUSTER_SHORT_INDEX_MASK = (1UL << CLUSTER_SHORT_INDEX_BITS_COUNT) - 1, //14 bits is enough for addressing the first 16 blocks of 256MB where the directories are allowed to be stored for Berwick. (Currently only the first block!)
+#endif
 		LAST_CLUSTER_INDEX_VALUE = CLUSTER_INDEX_MASK - 1, //Keep one value to mark it as INVALID.
 		START_END_VALUE_FLAG = 1UL << 31,
 		INVALID_VALUE = CLUSTER_INDEX_MASK,
 		CHAIN_START_END_MASK = START_END_VALUE_FLAG,
 		FLAGS_AND_INDEX_MASK = CHAIN_START_END_MASK | CLUSTER_INDEX_MASK,
+#if !(SPLIT_FAT__USE_SEPARATE_CRC_FIELD == 1)
 		FLAGS_AND_SHORT_INDEX_MASK = CHAIN_START_END_MASK | CLUSTER_SHORT_INDEX_MASK,
+#endif
 		START_OF_CHAIN = START_END_VALUE_FLAG,
 		END_OF_CHAIN = START_END_VALUE_FLAG,
 		FDRI_START_BIT = CLUSTER_INDEX_BITS_COUNT + 1, //File Descriptor Record Index start bit
 		HIGH_POSITION_OF_8_CRC_BITS = CLUSTER_INDEX_BITS_COUNT + 1,
+#if !(SPLIT_FAT__USE_SEPARATE_CRC_FIELD == 1)
 		LOW_POSITION_OF_8_CRC_BITS = CLUSTER_SHORT_INDEX_BITS_COUNT,
+#endif
 		FDRI_BITS_COUNT = 8, // FileDescriptorRecord bits. Also need 8 bits for half of the CRC-16, which can be alternatively encoded at the same place.
 		FDRI_MASK = ((1 << FDRI_BITS_COUNT) - 1),
 		FDRI_SHIFTED_MASK = FDRI_MASK << FDRI_START_BIT,
+#if !(SPLIT_FAT__USE_SEPARATE_CRC_FIELD == 1)
 		CRC_LOW_POSITION_8_BITS_MASK = FDRI_MASK << CLUSTER_SHORT_INDEX_BITS_COUNT,
+#endif
 
 		//CRC per cluster
+#if (SPLIT_FAT__USE_SEPARATE_CRC_FIELD == 1)
+		CRC24_BIT_MASK = (1UL << 24) - 1,
+		CRC24_INITIALIZED = 1UL << 31,
+		CRC_UNINITIALIZED = 0,
+		CRC_BIT_COUNT = 24,
+		CLUSTER_NOT_INITIALIZED = 1UL << 30,
+#else
 		CRC_INITIALIZED_MASK = 1UL << CLUSTER_INDEX_BITS_COUNT, // A single bit mask in mPrev
 		CRC_BIT_COUNT = 16,
 		CLUSTER_NOT_INITIALIZED = 1UL << CLUSTER_INDEX_BITS_COUNT, // A single bit mask in mNext
+#endif
 	};
 
 	inline bool isValidClusterIndex(ClusterIndexType clusterIndex) {
@@ -263,26 +282,36 @@ namespace SFAT {
 		FATCellValueType()
 			: mPrev(0)
 			, mNext(0)
+#if (SPLIT_FAT__USE_SEPARATE_CRC_FIELD == 1)
+			, mCRC(CRC_UNINITIALIZED)
+#endif
 		{
 		}
 
 		FATCellValueType(ClusterIndexType prevClusterIndex, ClusterIndexType nextClusterIndex)
 			: mPrev(prevClusterIndex)
 			, mNext(nextClusterIndex)
+#if (SPLIT_FAT__USE_SEPARATE_CRC_FIELD == 1)
+			, mCRC(CRC_UNINITIALIZED)
+#endif
 		{
 		}
 
 		inline ClusterIndexType getNext() const {
+#if !(SPLIT_FAT__USE_SEPARATE_CRC_FIELD == 1)
 			if (isEndOfChain()) {
 				return mNext & CLUSTER_SHORT_INDEX_MASK;
 			}
+#endif
 			return mNext & CLUSTER_INDEX_MASK;
 		}
 
 		inline ClusterIndexType getPrev() const {
+#if !(SPLIT_FAT__USE_SEPARATE_CRC_FIELD == 1)
 			if (isStartOfChain()) {
 				return mPrev & CLUSTER_SHORT_INDEX_MASK;
 			}
+#endif
 			return mPrev & CLUSTER_INDEX_MASK;
 		}
 
@@ -299,17 +328,25 @@ namespace SFAT {
 		inline void setNext(ClusterIndexType value) {
 			// Clear the flag for end-of-chain if it is set.
 			// Set the next cluster index
+#if !(SPLIT_FAT__USE_SEPARATE_CRC_FIELD == 1)
 			uint16_t crc = decodeCRC();
 			mNext = (mNext & (~FLAGS_AND_INDEX_MASK)) | (value & CLUSTER_INDEX_MASK);
 			_encodeCRC(crc);
+#else
+			mNext = (mNext & (~FLAGS_AND_INDEX_MASK)) | (value & CLUSTER_INDEX_MASK);
+#endif
 		}
 
 		inline void setPrev(ClusterIndexType value) {
 			// Clear the flag for start-of-chain if it is set.
 			// Set the next cluster index
+#if !(SPLIT_FAT__USE_SEPARATE_CRC_FIELD == 1)
 			uint16_t crc = decodeCRC();
 			mPrev = (mPrev & (~FLAGS_AND_INDEX_MASK)) | (value & CLUSTER_INDEX_MASK);
 			_encodeCRC(crc);
+#else
+			mPrev = (mPrev & (~FLAGS_AND_INDEX_MASK)) | (value & CLUSTER_INDEX_MASK);
+#endif
 		}
 
 		inline void makeEndOfChain() {
@@ -346,6 +383,34 @@ namespace SFAT {
 			}
 		}
 
+#if	(SPLIT_FAT__USE_SEPARATE_CRC_FIELD == 1)
+		inline void encodeCRC(uint32_t crc) {
+			mCRC = CRC24_INITIALIZED | (crc & CRC24_BIT_MASK);
+		}
+
+		// Used just for the clusters after the first and before the last one.
+		inline uint32_t decodeCRC() {
+			return mCRC & CRC24_BIT_MASK;
+		}
+
+		inline bool isCRCInitialized() const {
+			return (mCRC & CRC24_INITIALIZED) != 0;
+		}
+
+		inline bool isClusterInitialized() const {
+			return (mCRC & CLUSTER_NOT_INITIALIZED) != 0;
+		}
+
+		inline void setClusterInitialized(bool initialized) {
+			// Setting the bit to 0 if the cluster is initialized and 1 if it is not.
+			if (initialized) {
+				mCRC &= (~CLUSTER_NOT_INITIALIZED);
+			}
+			else {
+				mCRC |= CLUSTER_NOT_INITIALIZED;
+			}
+		}
+#else
 		// Used just for the clusters after the first and before the last one.
 		inline void _encodeCRC(uint16_t crc) {
 			if (isStartOfChain()) {
@@ -370,20 +435,13 @@ namespace SFAT {
 
 		// Used just for the clusters after the first and before the last one.
 		inline uint16_t decodeCRC() {
-			uint16_t crc;
-			if (isStartOfChain()) {
-				crc = static_cast<uint16_t>(mPrev >> LOW_POSITION_OF_8_CRC_BITS) & 0xFF;
-			}
-			else {
-				crc = static_cast<uint16_t>(mPrev >> HIGH_POSITION_OF_8_CRC_BITS) & 0xFF;
-			}
+			uint16_t crc = isStartOfChain()
+				? static_cast<uint16_t>(mPrev >> LOW_POSITION_OF_8_CRC_BITS) & 0xFF
+				: static_cast<uint16_t>(mPrev >> HIGH_POSITION_OF_8_CRC_BITS) & 0xFF;
 
-			if (isEndOfChain()) {
-				crc |= static_cast<uint16_t>(mNext >> (LOW_POSITION_OF_8_CRC_BITS - 8)) & 0xFF00;
-			}
-			else {
-				crc |= static_cast<uint16_t>(mNext >> (HIGH_POSITION_OF_8_CRC_BITS - 8)) & 0xFF00;
-			}
+			crc |= isEndOfChain()
+				? static_cast<uint16_t>(mNext >> (LOW_POSITION_OF_8_CRC_BITS - 8)) & 0xFF00
+				: static_cast<uint16_t>(mNext >> (HIGH_POSITION_OF_8_CRC_BITS - 8)) & 0xFF00;
 
 			return crc;
 		}
@@ -405,6 +463,7 @@ namespace SFAT {
 				mNext |= CLUSTER_NOT_INITIALIZED;
 			}
 		}
+#endif //!(SPLITFAT_USE_SEPARATE_CRC_FIELD == 1)
 
 		inline bool isFreeCluster() const {
 			// Note that only (value.getNext() == 0), means a free cluster
@@ -458,6 +517,9 @@ namespace SFAT {
 	private:
 		ClusterIndexType mPrev; // Points to the previous cluster in the file (cluster chain)
 		ClusterIndexType mNext; // Points to the mNext cluster in the file (cluster chain)
+#if (SPLIT_FAT__USE_SEPARATE_CRC_FIELD == 1) && (SPLIT_FAT__ENABLE_CRC_PER_CLUSTER == 1)
+		uint32_t mCRC;
+#endif
 	};
 
 } //namespace SFAT

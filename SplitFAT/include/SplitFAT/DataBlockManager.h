@@ -20,9 +20,9 @@ namespace SFAT {
 	class VolumeManager;
 
 	struct ClusterDataCache {
-		ClusterIndexType mClusterIndex;
+		ClusterIndexType mClusterIndex = ClusterValues::LAST_CLUSTER_INDEX_VALUE;
 		std::vector<uint8_t> mBuffer;
-		bool mIsCacheInSync;
+		bool mIsCacheInSync = false;
 	};
 
 	class DataBlockManager {

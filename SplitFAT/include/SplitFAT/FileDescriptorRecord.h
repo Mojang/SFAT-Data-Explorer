@@ -38,24 +38,24 @@ namespace SFAT {
 		bool isDirectory() const { return !isFile(); }
 		bool isSameName(const std::string& name) const;
 
-		char		mEntityName[static_cast<uint32_t>(FileDescriptorEnums::ENTITY_NAME_SIZE)];
-		uint32_t	mAttributes; /// A combination of FileAttributes
-		uint32_t	mUniqueID; // Unique entity ID. Not used yet.
-		FileSizeType mFileSize;
+		char		mEntityName[static_cast<uint32_t>(FileDescriptorEnums::ENTITY_NAME_SIZE)] = { 0 };
+		uint32_t	mAttributes = 0; /// A combination of FileAttributes
+		uint32_t	mUniqueID = 0; // Unique entity ID. Not used yet.
+		FileSizeType mFileSize = 0;
 		// The mStartCluster should contain ClusterValues::INVALID_VALUE if there is no cluster chain allocated for the file, the file-size is 0.
 		// It should point to the first cluster of the cluster chain if the file-size is non zero.
-		ClusterIndexType mStartCluster;
-		uint32_t	mCRC;
-		time_t		mTimeCreated;
-		time_t		mTimeModified;
+		ClusterIndexType mStartCluster = ClusterValues::INVALID_VALUE;
+		uint32_t	mCRC = 0;
+		time_t		mTimeCreated = 0;
+		time_t		mTimeModified = 0;
 
 		// The intent is to use mLastCluster for optimization, integrity-test and recovery functionality.
 		// The mLastCluster should contain ClusterValues::INVALID_VALUE if there is no cluster chain allocated for the file, the file-size is 0.
 		// It should point to the last cluster of the cluster chain if the file-size is non zero.
-		ClusterIndexType mLastCluster;
+		ClusterIndexType mLastCluster = 0;
 
 		// To be used for debugging. Note that this doesn't change the layout of the file-descriptor-record as it is still in the range of 256 bytes per record.
-		ClusterIndexType mOldClusterTrace;
+		ClusterIndexType mOldClusterTrace = 0;
 	};
 
 } // namespace SFAT

@@ -159,7 +159,7 @@ namespace SFAT {
 
 			if (!cellValue.isFreeCluster()) {
 				err = mVolumeManager.readCluster(mClusterDataBuffer, clusterIndex);
-				if (err != ErrorCode::RESULT_OK) {
+				if ((err != ErrorCode::RESULT_OK) && (err != ErrorCode::ERROR_READING_CLUSTER_DATA_CRC_DOES_NOT_MATCH)) {
 					return err;
 				}
 

@@ -23,15 +23,15 @@ namespace SFAT {
 			MAX_ALLOWED_BLOCKS_COUNT = 64, // The count of 60 blocks (256MB each) will allow the allocation of up to 15GB
 		};
 
-		uint16_t verificationCode; // Must be 0x5FA7
-		uint8_t id;
-		uint8_t headerSize;
-		uint8_t virtualBlocksCount; // 23 virtual blocks
-		uint8_t scratchBlockIndex;
-		uint32_t dataCRC;
+		uint16_t verificationCode = 0; // Must be 0x5FA7
+		uint8_t id = 0;
+		uint8_t headerSize = 0;
+		uint8_t virtualBlocksCount = 0; // 23 virtual blocks
+		uint8_t scratchBlockIndex = 0;
+		uint32_t dataCRC = 0;
 
 		// This headerCRC must be last
-		uint32_t headerCRC;
+		uint32_t headerCRC = 0;
 	};
 
 	struct BlockVirtualizationDescriptor {
@@ -40,7 +40,7 @@ namespace SFAT {
 		void cleanup();
 
 		BlockVirtualizationHeader header;
-		uint8_t blockIndices[BlockVirtualizationHeader::MAX_ALLOWED_BLOCKS_COUNT];
+		uint8_t blockIndices[BlockVirtualizationHeader::MAX_ALLOWED_BLOCKS_COUNT] = { 0 };
 	};
 
 	class BlockVirtualization {

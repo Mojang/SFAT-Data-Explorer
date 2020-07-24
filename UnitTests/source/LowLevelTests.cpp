@@ -488,6 +488,7 @@ TEST_F(LowLevelUnitTest, ClusterWriteRead) {
 		err = volumeManager.writeCluster(buffer0, 0);
 		EXPECT_EQ(err, ErrorCode::RESULT_OK);
 
+		uint32_t calculatedCRC = SFAT::CRC16::calculate(buffer0.data(), clusterSize);
 		err = volumeManager.readCluster(buffer1, 0);
 		EXPECT_EQ(err, ErrorCode::RESULT_OK);
 		buffer1[0] ^= 0xff;
